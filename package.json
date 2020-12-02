@@ -1,0 +1,17 @@
+{
+  "name": "mongo-to-s3-export",
+  "version": "1.0.0",
+  "description": "This is simple aws lambda function that use `mongodump` to backup mongodb database.",
+  "main": "index.js",
+  "dependencies": {
+    "zip-folder": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/companieshouse/mongo-to-s3-export.git"
+  }
+}
