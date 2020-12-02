@@ -12,6 +12,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alonhar/mongo-to-s3-export.git"
+    "url": "git+https://github.com/companieshouse/mongo-to-s3-export.git"
   }
 }
