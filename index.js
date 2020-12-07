@@ -8,7 +8,7 @@ const exec = require('child_process').exec;
 module.exports.handler = function(event, context, cb) {
     process.env['PATH'] = process.env['PATH'] + ':' + process.env['LAMBDA_TASK_ROOT']
     console.log(process.env['PATH']);
-    
+
     const mongoURI = process.env.MONGO_URL; // with port
     const mongoDBName = process.env.MONGO_DATABASE;
     const mongoCollection = process.env.MONGO_COLLECTION;
@@ -20,7 +20,7 @@ module.exports.handler = function(event, context, cb) {
     const s3Path = process.env.S3_PATH;
     // split s3Path into bucket name and folder
     const bucketName = s3Path.split('/', 1);
-    const folder = s3Path.slice(bucketName[0].length).substring(1) + '/' + mongoCollection + '/';
+    const folder = s3Path.slice(bucketName[0].length).substring(1) + '/' + mongoDBName + '/' + mongoCollection + '/';
 
     console.log(`bucketName = ${bucketName}`);
     console.log(`folder = ${folder}`);
@@ -32,7 +32,7 @@ module.exports.handler = function(event, context, cb) {
     });
 
     const now = new Date();
-    const outputFileName = mongoCollection + "/" + now.toDateString().replace(/ /g, '') + '_' + now.getTime();
+    const outputFileName = mongoDBName + "/" + mongoCollection + "/" + now.toDateString().replace(/ /g, '') + '_' + now.getTime();
     const tempFilePath = '/tmp/' + outputFileName;
 
     // clean bucket
