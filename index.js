@@ -20,7 +20,7 @@ module.exports.handler = function(event, context, cb) {
     const s3Path = process.env.S3_PATH;
     // split s3Path into bucket name and folder
     const bucketName = s3Path.split('/', 1);
-    const folder = s3Path.slice(bucketName[0].length).substring(1) + '/' + mongoCollection + '/';
+    const folder = s3Path.slice(bucketName[0].length).substring(1) + '/' + mongoDBName + '/' + mongoCollection + '/';
 
     console.log(`bucketName = ${bucketName}`);
     console.log(`folder = ${folder}`);
