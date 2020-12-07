@@ -8,7 +8,7 @@ const exec = require('child_process').exec;
 module.exports.handler = function(event, context, cb) {
     process.env['PATH'] = process.env['PATH'] + ':' + process.env['LAMBDA_TASK_ROOT']
     console.log(process.env['PATH']);
-    
+
     const mongoURI = process.env.MONGO_URL; // with port
     const mongoDBName = process.env.MONGO_DATABASE;
     const mongoCollection = process.env.MONGO_COLLECTION;
@@ -32,7 +32,7 @@ module.exports.handler = function(event, context, cb) {
     });
 
     const now = new Date();
-    const outputFileName = mongoCollection + "/" + now.toDateString().replace(/ /g, '') + '_' + now.getTime();
+    const outputFileName = mongoDBName + "/" + mongoCollection + "/" + now.toDateString().replace(/ /g, '') + '_' + now.getTime();
     const tempFilePath = '/tmp/' + outputFileName;
 
     // clean bucket
