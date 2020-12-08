@@ -10,12 +10,18 @@ module.exports.handler = function(event, context, cb) {
     console.log(process.env['PATH']);
 
     const mongoURI = process.env.MONGO_URL; // with port
-    const mongoDBName = process.env.MONGO_DATABASE;
-    const mongoCollection = process.env.MONGO_COLLECTION;
+    const mongoDBName = event.MONGO_DATABASE;
+    const mongoCollection = event.MONGO_COLLECTION;
     const mongoURIparsed = url.parse(mongoURI);
     const mongoHost = mongoURIparsed.host;
     const mongoUsername = mongoURIparsed.auth ? mongoURIparsed.auth.split(':')[0] : undefined;
     const mongoPassword = mongoURIparsed.auth ? mongoURIparsed.auth.split(':')[1] : undefined;
+
+    if(!mongoDBName || !mongoCollection) {
+        console.error("Event must contain MONGO_DATABASE and MONGO_COLLECTION");
+        return;
+    }
+    console.log("mongoDB name = " + mongoDBName + "\n" + "mongoCollection name = " + mongoCollection);
 
     const s3Path = process.env.S3_PATH;
     // split s3Path into bucket name and folder
